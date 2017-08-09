@@ -10,21 +10,11 @@ import UIKit
 
 private let reuseIdentifier = "Cell"
 
-class SourceCollectionViewController: UICollectionViewController {
+class SourceCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let itemSize = UIScreen.main.bounds.width/3 - 3
-        
-        let layout = UICollectionViewFlowLayout()
-        //layout.sectionInset = UIEdgeInsetsMake(0, 0, 10, 0)
-        layout.itemSize = CGSize(width: itemSize, height: itemSize)
-        
-        layout.minimumInteritemSpacing = 3
-        layout.minimumLineSpacing = 3
-        
-        collectionView?.collectionViewLayout = layout 
     }
 
     override func didReceiveMemoryWarning() {
@@ -52,18 +42,24 @@ class SourceCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return APIStorage.count
+        return SourceOfAPI.APIStorage.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CellWithImage", for: indexPath) as! SourceCollectionViewCell
-        cell.imageView.image = APIStorage[indexPath.row].1
+        cell.imageView.image = SourceOfAPI.APIStorage[indexPath.row].image
+        
     
         // Configure the cell
     
         return cell
     }
 
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        SourceOfAPI.APIStorage[indexPath.row].state = !SourceOfAPI.APIStorage[indexPath.row].state
+        (collectionView.cellForItem(at: indexPath) as! SourceCollectionViewCell).check.isHidden  = ((collectionView.cellForItem(at: indexPath) as! SourceCollectionViewCell).check.isHidden) ? false : true
+        
+    }
     // MARK: UICollectionViewDelegate
 
     /*
@@ -95,4 +91,19 @@ class SourceCollectionViewController: UICollectionViewController {
     }
     */
 
+    //MARK: - Setting normal size for image
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let itemSize = UIScreen.main.bounds.width/3 - 3
+
+        return CGSize(width: itemSize, height: itemSize)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return CGFloat(3.0)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return CGFloat(3.0)
+    }
 }
