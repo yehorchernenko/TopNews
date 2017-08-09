@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="DBO-t7-wyZ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="DBO-t7-wyZ">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -106,13 +106,64 @@
                             <rect key="frame" x="113" y="7" width="150" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="Source v"/>
+                            <connections>
+                                <segue destination="uw3-Nk-8EI" kind="show" id="vb4-Gl-6Ta"/>
+                            </connections>
                         </button>
                         <barButtonItem key="rightBarButtonItem" title="★" style="plain" id="Ins-AM-Shu"/>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1076" y="138.98050974512745"/>
+            <point key="canvasLocation" x="137" y="1604"/>
+        </scene>
+        <!--Source-->
+        <scene sceneID="l2w-l0-nSQ">
+            <objects>
+                <collectionViewController title="Source" id="uw3-Nk-8EI" customClass="SourceCollectionViewController" customModule="Top_News" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="O9q-Ii-jeq">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="v1X-4N-8a6">
+                            <size key="itemSize" width="140" height="125"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CellWithImage" id="T2S-jH-Dh5" customClass="SourceCollectionViewCell" customModule="Top_News" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="140" height="125"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="140" height="125"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="A5s-e4-Su0">
+                                            <rect key="frame" x="0.0" y="0.0" width="140" height="125"/>
+                                        </imageView>
+                                    </subviews>
+                                </view>
+                                <constraints>
+                                    <constraint firstItem="A5s-e4-Su0" firstAttribute="centerY" secondItem="T2S-jH-Dh5" secondAttribute="centerY" id="EsD-HU-Zd6"/>
+                                    <constraint firstItem="A5s-e4-Su0" firstAttribute="width" secondItem="T2S-jH-Dh5" secondAttribute="width" id="GS8-IL-KqM"/>
+                                    <constraint firstItem="A5s-e4-Su0" firstAttribute="centerX" secondItem="T2S-jH-Dh5" secondAttribute="centerX" id="NKF-hO-o1o"/>
+                                    <constraint firstItem="A5s-e4-Su0" firstAttribute="height" secondItem="T2S-jH-Dh5" secondAttribute="height" id="mvs-o9-qKP"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="imageView" destination="A5s-e4-Su0" id="pvp-P5-eZ3"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="uw3-Nk-8EI" id="fbu-RQ-iyg"/>
+                            <outlet property="delegate" destination="uw3-Nk-8EI" id="r3K-fA-8BS"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="w8u-ch-vxT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-364" y="2328.4857571214393"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="jqA-H9-FRi">
