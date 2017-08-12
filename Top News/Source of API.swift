@@ -20,6 +20,19 @@ class SourceOfAPI{
     ("https://newsapi.org/v1/articles?source=breitbart-news&sortBy=top&apiKey=082c01aeef3b4346aafa45f69267d9af", #imageLiteral(resourceName: "breitbart"),false),
     ("https://newsapi.org/v1/articles?source=business-insider&sortBy=top&apiKey=082c01aeef3b4346aafa45f69267d9af", #imageLiteral(resourceName: "business-insider"),false)
 ]
- 
+
+    class func sortByState() -> [(url: String,image: UIImage,state: Bool)]{
+        return SourceOfAPI.APIStorage.filter({ (url,imege,state) -> Bool in
+            state
+        })
+    }
+    //FIXME: - to fix
+    class func saveAPI(){
+        UserDefaults.standard.set(SourceOfAPI.APIStorage, forKey: "APIStorage")
+    }
+    
+    class func loadAPI(){
+        SourceOfAPI.APIStorage = (UserDefaults.standard.value(forKey: "APIStorage") as? [(url: String,image: UIImage,state: Bool)]) ?? SourceOfAPI.APIStorage
+    }
 }
 

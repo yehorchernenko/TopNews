@@ -21,5 +21,4 @@ class News{
         self.sortBy = sortBy
         self.articles = articles
     }
-    
 }

@@ -8,13 +8,12 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
+private let reuseIdentifier = "CellWithImage"
 
 class SourceCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
 
     override func didReceiveMemoryWarning() {
@@ -46,9 +45,9 @@ class SourceCollectionViewController: UICollectionViewController, UICollectionVi
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CellWithImage", for: indexPath) as! SourceCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! SourceCollectionViewCell
         cell.imageView.image = SourceOfAPI.APIStorage[indexPath.row].image
-        
+        cell.check.isHidden = !SourceOfAPI.APIStorage[indexPath.row].state
     
         // Configure the cell
     
@@ -58,6 +57,7 @@ class SourceCollectionViewController: UICollectionViewController, UICollectionVi
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         SourceOfAPI.APIStorage[indexPath.row].state = !SourceOfAPI.APIStorage[indexPath.row].state
         (collectionView.cellForItem(at: indexPath) as! SourceCollectionViewCell).check.isHidden  = ((collectionView.cellForItem(at: indexPath) as! SourceCollectionViewCell).check.isHidden) ? false : true
+        
         
     }
     // MARK: UICollectionViewDelegate
@@ -106,4 +106,6 @@ class SourceCollectionViewController: UICollectionViewController, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return CGFloat(3.0)
     }
+
+    
 }
