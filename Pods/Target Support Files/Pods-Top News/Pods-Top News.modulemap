@@ -1,0 +1,6 @@
+framework module Pods_Top_News {
+  umbrella header "Pods-Top News-umbrella.h"
+
+  export *
+  module * { export * }
+}

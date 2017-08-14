@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -31,28 +32,24 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidAppear(_ animated: Bool) {
         //choosenSources = SourceOfAPI.sortByState()
-        //fetchArticles()
+        fetchArticles()
 
     }
     
     //MARK: - Working with tableView cells
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return articles?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CELL", for: indexPath) as! MainTableViewCell
+        cell.titleLabel.text = self.articles?[indexPath.row].title
+        cell.author.text = self.articles?[indexPath.row].author
+        cell.descriptionLabel.text = self.articles?[indexPath.row].description
+        cell.publishedAtLabel.text = self.articles?[indexPath.row].publishedAt
+        cell.mainImageView.sd_setImage(with: URL(string: self.articles?[indexPath.row].urlToImage ?? "http://itdesignhouse.com/wp-content/themes/TechNews/images/img_not_available.jpg"), placeholderImage: #imageLiteral(resourceName: "default"))
         
-        cell.titleLabel.text = "SUKKAAAAA"
-        cell.publishedAtLabel.text = "12321"
-        cell.descriptionLabel.text = "asdasd"
-        cell.author.text = "we"
-//        cell.titleLabel.text = self.articles?[indexPath.row].title
-//        cell.author.text = self.articles?[indexPath.row].author
-//        cell.descriptionLabel.text = self.articles?[indexPath.row].description
-//        cell.publishedAtLabel.text = self.articles?[indexPath.row].publishedAt
-//        
         
         return cell
     }
@@ -82,7 +79,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                                     else {return}
                                 
                                 let newArticle = Article(author: author, title: title, description: description, url: url, urlToImage: urlToImage, publishedAt: publishedAt)
-                                print("New title is - \(newArticle.title)/b")
+                                //print("New title is - \(newArticle.title)/b")
                                 DispatchQueue.main.async {
                                     self.articles?.append(newArticle)
                                     self.tableView.reloadData()

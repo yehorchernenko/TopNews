@@ -14,6 +14,7 @@ class SourceCollectionViewController: UICollectionViewController, UICollectionVi
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        SourceOfAPI.loadAPI()
     }
 
     override func didReceiveMemoryWarning() {
@@ -46,9 +47,8 @@ class SourceCollectionViewController: UICollectionViewController, UICollectionVi
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! SourceCollectionViewCell
-        cell.imageView.image = SourceOfAPI.APIStorage[indexPath.row].image
+        cell.imageView.image = UIImage(named: SourceOfAPI.APIStorage[indexPath.row].image)
         cell.check.isHidden = !SourceOfAPI.APIStorage[indexPath.row].state
-    
         // Configure the cell
     
         return cell
@@ -57,6 +57,7 @@ class SourceCollectionViewController: UICollectionViewController, UICollectionVi
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         SourceOfAPI.APIStorage[indexPath.row].state = !SourceOfAPI.APIStorage[indexPath.row].state
         (collectionView.cellForItem(at: indexPath) as! SourceCollectionViewCell).check.isHidden  = ((collectionView.cellForItem(at: indexPath) as! SourceCollectionViewCell).check.isHidden) ? false : true
+        SourceOfAPI.saveAPI()
         
         
     }
