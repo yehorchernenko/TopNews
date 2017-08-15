@@ -13,10 +13,11 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     //MARK: - Properties
     
+    @IBOutlet weak var infiniteFooterView: InfiniteFooterView!
     @IBOutlet weak var tableView: UITableView!
-    let stringURL = "https://newsapi.org/v1/articles?source=techcrunch&sortBy=top&apiKey=082c01aeef3b4346aafa45f69267d9af"
+    var sourceOfApi: [ApiObject]?
+    var sourceIndex = 1
     var articles: [Article]? = []
-    var choosenSources: [(url: String,image: UIImage,state: Bool)] = []
     let identifier = "ArticleOFNewsCellIdentifier"
     
     //MARK: - Main func
@@ -31,9 +32,23 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        //choosenSources = SourceOfAPI.sortByState()
-        fetchArticles()
-
+        //sourceIndex = UserDefaults.standard.value(forKey: "SourceIndex") as? Int ?? 1
+        
+        sourceOfApi = SourceOfAPI.sortByState()
+        
+        if sourceOfApi?.count != 0{
+            NewsAPI.getNews(stringUrl: (sourceOfApi?[0].url)!) { [weak self] (downloadedNews) in
+                if let news = downloadedNews{
+                    
+                    if self?.articles == nil{
+                        self?.articles = news
+                    }
+                    
+                    self?.articles?.append(contentsOf: news)
+                    self?.tableView.reloadData()
+                }
+            }
+        }
     }
     
     //MARK: - Working with tableView cells
@@ -46,52 +61,21 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         let cell = tableView.dequeueReusableCell(withIdentifier: "CELL", for: indexPath) as! MainTableViewCell
         cell.titleLabel.text = self.articles?[indexPath.row].title
         cell.author.text = self.articles?[indexPath.row].author
-        cell.descriptionLabel.text = self.articles?[indexPath.row].description
         cell.publishedAtLabel.text = self.articles?[indexPath.row].publishedAt
         cell.mainImageView.sd_setImage(with: URL(string: self.articles?[indexPath.row].urlToImage ?? "http://itdesignhouse.com/wp-content/themes/TechNews/images/img_not_available.jpg"), placeholderImage: #imageLiteral(resourceName: "default"))
-        
+        cell.mainImageView.frame.size = setSize(image: cell.mainImageView.image!)
+        //print(cell.mainImageView.frame.size)
         
         return cell
     }
 
     //MARK: - Functions
     
-    func fetchArticles(){
-        if let url = URL(string: stringURL){
-            let task = URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
-                
-                if let taskError = error{
-                    print(taskError.localizedDescription)
-                    return
-                }
-                
-                
-                if let downloadedData = data{
-                    if let json = (try? JSONSerialization.jsonObject(with: downloadedData, options: [])) as? [String: Any]{
-                        if let articlesFromJson = json["articles"] as? [[String:Any]]{
-                            for art in articlesFromJson{
-                                guard let author = art["author"] as? String,
-                                    let title = art["title"] as? String,
-                                    let description = art["description"] as? String,
-                                    let url = art["url"] as? String,
-                                    let urlToImage = art["urlToImage"] as? String,
-                                    let publishedAt = art["publishedAt"] as? String
-                                    else {return}
-                                
-                                let newArticle = Article(author: author, title: title, description: description, url: url, urlToImage: urlToImage, publishedAt: publishedAt)
-                                //print("New title is - \(newArticle.title)/b")
-                                DispatchQueue.main.async {
-                                    self.articles?.append(newArticle)
-                                    self.tableView.reloadData()
-                                }
-                            }
-                        }
-                    }
-                }
-            })
-            task.resume()
-        }
+    func setSize(image: UIImage) -> CGSize{
+        let width = self.tableView.frame.size.width
+        let height = image.size.height / image.scale
         
+        return CGSize(width: width, height: height)
     }
     
     /*
@@ -103,4 +87,53 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
      // Pass the selected object to the new view controller.
      }
      */
+    
+    //MARK: - Infinite scrolling methods
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let currentOffest = scrollView.contentOffset.y
+        let maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height
+        
+        if (maximumOffset - currentOffest) <= -20{
+            loadMore()
+        }
+    }
+    
+    func loadMore(){
+        if let sourceArray = sourceOfApi{
+            print(sourceArray.count - 1)
+            if (sourceArray.count - 1) >= sourceIndex{
+                print("+++++++++++++")
+
+                NewsAPI.getNews(stringUrl: sourceArray[sourceIndex].url) { [weak self] (downloadedNews) in
+                    if let news = downloadedNews{
+                        
+                        if self?.articles == nil{
+                            self?.articles = news
+                        }
+                    
+                        self?.articles?.append(contentsOf: news)
+                        self?.tableView.reloadData()
+                        
+                        self?.sourceIndex += 1
+                        print(self?.sourceIndex)
+                        //UserDefaults.standard.set(self?.sourceIndex, forKey: "SourceIndex")
+                    }
+                }
+            }
+        }
+    }
+    
+    //MARK: - Web methods
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let webVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WebViewController") as! WebViewController
+        webVC.stringUrl = self.articles?[indexPath.row].url
+        
+        self.present(webVC, animated: true, completion: nil) 
+    }
+    
+    
+    
+    //MARK: - TEST
 }

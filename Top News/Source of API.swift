@@ -56,13 +56,14 @@ class SourceOfAPI{
         ]
         
 
-    //FIXME: - to fix
 
-//    class func sortByState() -> [(url: String,image: String,state: Bool)]{
-//        return SourceOfAPI.APIStorage.filter({ (url,imege,state) -> Bool in
-//            state
-//        })
-//    }
+    class func sortByState() -> [ApiObject]{
+        loadAPI()
+        return SourceOfAPI.APIStorage.filter({ ApiObject -> Bool in
+            ApiObject.state
+        })
+    }
+    
     class func saveAPI(){
         let encodeData = NSKeyedArchiver.archivedData(withRootObject: self.APIStorage)
         UserDefaults.standard.set(encodeData, forKey: "APIStorage")
