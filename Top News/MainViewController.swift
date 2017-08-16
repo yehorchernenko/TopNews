@@ -134,6 +134,42 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     
+    //MARK: - PopupView
     
-    //MARK: - TEST
+    @IBAction func seeDescriptionButton(_ sender: UIButton) {
+        if let cell = sender.superview?.superview as? MainTableViewCell {
+            let indexPath = self.tableView.indexPath(for: cell)
+            
+            showPopUpWithDescription(at: indexPath!)
+        }
+    }
+    
+    @IBAction func hideButton(_ sender: UIButton) {
+        closePopUpWithDescription()
+    }
+    @IBOutlet var popUpView: PopUpViewWithDescription!
+    
+    
+    func showPopUpWithDescription(at indexPath: IndexPath){
+        self.view.addSubview(popUpView)
+        popUpView.center = self.tableView.center
+        popUpView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+        popUpView.alpha = 0
+        popUpView.descriptionLabel.text = self.articles?[indexPath.row].description ?? "None description"
+        
+        UIView.animate(withDuration: 0.4) {
+            self.popUpView.alpha = 1
+            self.popUpView.transform = CGAffineTransform.identity
+        }
+    }
+    
+    func closePopUpWithDescription(){
+        UIView.animate(withDuration: 0.3, animations: {
+            self.popUpView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+            self.popUpView.alpha = 0
+        }) { (succes) in
+            self.popUpView.removeFromSuperview()
+        }
+    }
 }
+

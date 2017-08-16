@@ -17,14 +17,7 @@ class MainTableViewCell: UITableViewCell {
     @IBOutlet weak var publishedAtLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
 
-    @IBAction func seeDescriptionButton(_ sender: Any) {
-        //print((sender as! UIButton).tag)
-    }
-    
-    
-    @IBAction func toReadLaterButton(_ sender: UIButton) {
-        print(sender.tag)
-    }
+
     
     override func awakeFromNib() {
         super.awakeFromNib()
