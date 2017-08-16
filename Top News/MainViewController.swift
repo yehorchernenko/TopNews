@@ -94,7 +94,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         let currentOffest = scrollView.contentOffset.y
         let maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height
         
-        if (maximumOffset - currentOffest) <= -20{
+        if (maximumOffset - currentOffest) <= 0{
             loadMore()
         }
     }
@@ -103,7 +103,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         if let sourceArray = sourceOfApi{
             print(sourceArray.count - 1)
             if (sourceArray.count - 1) >= sourceIndex{
-                print("+++++++++++++")
+
 
                 NewsAPI.getNews(stringUrl: sourceArray[sourceIndex].url) { [weak self] (downloadedNews) in
                     if let news = downloadedNews{
@@ -116,7 +116,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                         self?.tableView.reloadData()
                         
                         self?.sourceIndex += 1
-                        print(self?.sourceIndex)
                         //UserDefaults.standard.set(self?.sourceIndex, forKey: "SourceIndex")
                     }
                 }
