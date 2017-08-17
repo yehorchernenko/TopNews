@@ -220,6 +220,7 @@
 				TargetAttributes = {
 					748B3AB91F37385D000555EA = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = BB6356MAF8;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -444,7 +445,9 @@
 			baseConfigurationReference = 824BC1EE13673DDCD03FD77F /* Pods-Top News.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = BB6356MAF8;
 				INFOPLIST_FILE = "Top News/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Egor.Top-News";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -457,7 +460,9 @@
 			baseConfigurationReference = 6CD4B9E97C4265C479D8654E /* Pods-Top News.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = BB6356MAF8;
 				INFOPLIST_FILE = "Top News/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Egor.Top-News";
 				PRODUCT_NAME = "$(TARGET_NAME)";

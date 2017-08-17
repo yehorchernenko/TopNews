@@ -8,13 +8,14 @@
 
 import UIKit
 import SDWebImage
+import UIScrollView_InfiniteScroll
 
 class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     //MARK: - Properties
     
-    @IBOutlet weak var infiniteFooterView: InfiniteFooterView!
     @IBOutlet weak var tableView: UITableView!
+    
     var sourceOfApi: [ApiObject]?
     var sourceIndex = 1
     var articles: [Article]? = []
@@ -24,16 +25,20 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        tableView.addInfiniteScroll { [weak self] (tableView) in
+            self?.loadMore()
+            self?.tableView.finishInfiniteScroll()
+        }
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     override func viewDidAppear(_ animated: Bool) {
         //sourceIndex = UserDefaults.standard.value(forKey: "SourceIndex") as? Int ?? 1
-        
         sourceOfApi = SourceOfAPI.sortByState()
         
         if sourceOfApi?.count != 0{
@@ -78,41 +83,23 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         return CGSize(width: width, height: height)
     }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
     //MARK: - Infinite scrolling methods
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let currentOffest = scrollView.contentOffset.y
-        let maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height
-        
-        if (maximumOffset - currentOffest) <= 0{
-            loadMore()
-        }
-    }
     
     func loadMore(){
         if let sourceArray = sourceOfApi{
             print(sourceArray.count - 1)
             if (sourceArray.count - 1) >= sourceIndex{
-
-
+                
+                
                 NewsAPI.getNews(stringUrl: sourceArray[sourceIndex].url) { [weak self] (downloadedNews) in
                     if let news = downloadedNews{
                         
                         if self?.articles == nil{
                             self?.articles = news
+                        } else {
+                            self?.articles?.append(contentsOf: news)
                         }
-                    
-                        self?.articles?.append(contentsOf: news)
                         self?.tableView.reloadData()
                         
                         self?.sourceIndex += 1
@@ -135,6 +122,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     //MARK: - PopupView
     
+
+    
     @IBAction func seeDescriptionButton(_ sender: UIButton) {
         if let cell = sender.superview?.superview as? MainTableViewCell {
             let indexPath = self.tableView.indexPath(for: cell)
@@ -155,8 +144,9 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         popUpView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
         popUpView.alpha = 0
         popUpView.descriptionLabel.text = self.articles?[indexPath.row].description ?? "None description"
-        
+
         UIView.animate(withDuration: 0.4) {
+            //self.visualEffectView.effect = self.effect
             self.popUpView.alpha = 1
             self.popUpView.transform = CGAffineTransform.identity
         }
@@ -164,6 +154,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func closePopUpWithDescription(){
         UIView.animate(withDuration: 0.3, animations: {
+            //self.visualEffectView.effect = nil
             self.popUpView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
             self.popUpView.alpha = 0
         }) { (succes) in
