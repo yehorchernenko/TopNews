@@ -15,17 +15,23 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     //MARK: - Properties
     
     @IBOutlet weak var tableView: UITableView!
+    var refresher: UIRefreshControl!
     
     var sourceOfApi: [ApiObject]?
     var sourceIndex = 1
     var articles: [Article]? = []
     let identifier = "ArticleOFNewsCellIdentifier"
+    var newsAlreadyFetched = false
     
     //MARK: - Main func
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        refresher = UIRefreshControl()
+        refresher.attributedTitle = NSAttributedString(string: "Refreshing...")
+        refresher.addTarget(self, action: #selector(MainViewController.pullToRefresh), for: .valueChanged)
+        tableView.addSubview(refresher)
         
         tableView.infiniteScrollIndicatorMargin = 40
 
@@ -43,17 +49,20 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         //sourceIndex = UserDefaults.standard.value(forKey: "SourceIndex") as? Int ?? 1
         sourceOfApi = SourceOfAPI.sortByState()
         
-        if sourceOfApi?.count != 0{
-            NewsAPI.getNews(stringUrl: (sourceOfApi?[0].url)!) { [weak self] (downloadedNews) in
-                if let news = downloadedNews{
-                    
-                    if self?.articles == nil{
-                        self?.articles = news
+        if !newsAlreadyFetched{
+            if sourceOfApi?.count != 0{
+                NewsAPI.getNews(stringUrl: (sourceOfApi?[0].url)!) { [weak self] (downloadedNews) in
+                    if let news = downloadedNews{
+                        
+                        if self?.articles == nil{
+                            self?.articles = news
+                        }
+                        
+                        self?.articles?.append(contentsOf: news)
+                        self?.tableView.reloadData()
                     }
-                    
-                    self?.articles?.append(contentsOf: news)
-                    self?.tableView.reloadData()
                 }
+            newsAlreadyFetched = true
             }
         }
     }
@@ -161,6 +170,26 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.popUpView.alpha = 0
         }) { (succes) in
             self.popUpView.removeFromSuperview()
+        }
+    }
+    
+    //MARK: - Refresher func
+    
+    func pullToRefresh(){
+        articles?.removeAll()
+        if sourceOfApi?.count != 0{
+            NewsAPI.getNews(stringUrl: (sourceOfApi?[0].url)!) { [weak self] (downloadedNews) in
+                if let news = downloadedNews{
+                    
+                    if self?.articles == nil{
+                        self?.articles = news
+                    }
+                    
+                    self?.articles?.append(contentsOf: news)
+                    self?.tableView.reloadData()
+                }
+            }
+            refresher.endRefreshing()
         }
     }
 }
