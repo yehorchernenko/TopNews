@@ -27,6 +27,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         
         
+        tableView.infiniteScrollIndicatorMargin = 40
+
         tableView.addInfiniteScroll { [weak self] (tableView) in
             self?.loadMore()
             self?.tableView.finishInfiniteScroll()
@@ -63,7 +65,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CELL", for: indexPath) as! MainTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! MainTableViewCell
         cell.titleLabel.text = self.articles?[indexPath.row].title
         cell.author.text = self.articles?[indexPath.row].author
         cell.publishedAtLabel.text = self.articles?[indexPath.row].publishedAt

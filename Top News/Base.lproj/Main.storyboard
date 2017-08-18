@@ -27,7 +27,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CELL" rowHeight="275" id="wMj-gq-ExC" customClass="MainTableViewCell" customModule="Top_News" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ArticleOFNewsCellIdentifier" rowHeight="275" id="wMj-gq-ExC" customClass="MainTableViewCell" customModule="Top_News" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="275"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wMj-gq-ExC" id="RQ5-cY-3wP">
@@ -357,7 +357,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="check" width="32" height="32"/>
+        <image name="check" width="24" height="24"/>
         <image name="mark" width="24" height="24"/>
         <image name="more" width="24" height="24"/>
     </resources>
