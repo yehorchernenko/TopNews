@@ -18,7 +18,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     var refresher: UIRefreshControl!
     
     var sourceOfApi: [ApiObject]?
-    var sourceIndex = 1
+    var sourceIndex = 0
     var articles: [Article]? = []
     let identifier = "ArticleOFNewsCellIdentifier"
     var newsAlreadyFetched = false
@@ -35,8 +35,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         tableView.infiniteScrollIndicatorMargin = 40
 
-        tableView.addInfiniteScroll { [weak self] (tableView) in
-            self?.loadMore()
+        tableView.addInfiniteScroll { [weak self] (tableView) in //problem here
+            self?.loadData()
             self?.tableView.finishInfiniteScroll()
         }
     }
@@ -50,20 +50,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         sourceOfApi = SourceOfAPI.sortByState()
         
         if !newsAlreadyFetched{
-            if sourceOfApi?.count != 0{
-                NewsAPI.getNews(stringUrl: (sourceOfApi?[0].url)!) { [weak self] (downloadedNews) in
-                    if let news = downloadedNews{
-                        
-                        if self?.articles == nil{
-                            self?.articles = news
-                        }
-                        
-                        self?.articles?.append(contentsOf: news)
-                        self?.tableView.reloadData()
-                    }
-                }
+            loadData()
             newsAlreadyFetched = true
-            }
         }
     }
     
@@ -95,32 +83,22 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     
-    //MARK: - Infinite scrolling methods
+    //MARK: - Load data
     
-    func loadMore(){
+    func loadData(){
         if let sourceArray = sourceOfApi{
-            print(sourceArray.count - 1)
             if (sourceArray.count - 1) >= sourceIndex{
-                
-                
                 NewsAPI.getNews(stringUrl: sourceArray[sourceIndex].url) { [weak self] (downloadedNews) in
                     if let news = downloadedNews{
                         
-                        if self?.articles == nil{
-                            self?.articles = news
-                        } else {
-                            self?.articles?.append(contentsOf: news)
-                        }
+                        (self?.articles == nil) ? self?.articles = news : self?.articles?.append(contentsOf: news)
+
                         self?.tableView.reloadData()
-                        
-                        self?.sourceIndex += 1
-                        //UserDefaults.standard.set(self?.sourceIndex, forKey: "SourceIndex")
                     }
                 }
             }
         }
     }
-    
     //MARK: - Web methods
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -177,20 +155,9 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func pullToRefresh(){
         articles?.removeAll()
-        if sourceOfApi?.count != 0{
-            NewsAPI.getNews(stringUrl: (sourceOfApi?[0].url)!) { [weak self] (downloadedNews) in
-                if let news = downloadedNews{
-                    
-                    if self?.articles == nil{
-                        self?.articles = news
-                    }
-                    
-                    self?.articles?.append(contentsOf: news)
-                    self?.tableView.reloadData()
-                }
-            }
-            refresher.endRefreshing()
-        }
+        sourceIndex = 0
+        loadData()
+        refresher.endRefreshing()
     }
 }
 
