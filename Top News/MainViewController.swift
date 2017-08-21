@@ -8,37 +8,17 @@
 
 import UIKit
 import SDWebImage
-import UIScrollView_InfiniteScroll
 
 class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
-    //MARK: - Properties
-    
+        
     @IBOutlet weak var tableView: UITableView!
-    var refresher: UIRefreshControl!
-    
-    var sourceOfApi: [ApiObject]?
-    var sourceIndex = -1
+
+
     var articles: [Article]? = []
     let identifier = "ArticleOFNewsCellIdentifier"
-    var newsAlreadyFetched = false
-    
-    //MARK: - Main func
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        refresher = UIRefreshControl()
-        refresher.attributedTitle = NSAttributedString(string: "Refreshing...")
-        refresher.addTarget(self, action: #selector(MainViewController.pullToRefresh), for: .valueChanged)
-        tableView.addSubview(refresher)
-        
-        tableView.infiniteScrollIndicatorMargin = 40
-
-        tableView.addInfiniteScroll { [weak self] (tableView) in //problem here
-            self?.loadData()
-            self?.tableView.finishInfiniteScroll()
-        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -46,13 +26,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        //sourceIndex = UserDefaults.standard.value(forKey: "SourceIndex") as? Int ?? 1
-        sourceOfApi = SourceOfAPI.sortByState()
-        
-        if !newsAlreadyFetched{
-            loadData()
-            newsAlreadyFetched = true
-        }
+
     }
     
     //MARK: - Working with tableView cells
@@ -67,40 +41,12 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.author.text = self.articles?[indexPath.row].author
         cell.publishedAtLabel.text = self.articles?[indexPath.row].publishedAt
         cell.mainImageView.sd_setImage(with: URL(string: self.articles?[indexPath.row].urlToImage ?? "http://itdesignhouse.com/wp-content/themes/TechNews/images/img_not_available.jpg"), placeholderImage: #imageLiteral(resourceName: "default"))
-        cell.mainImageView.frame.size = setSize(image: cell.mainImageView.image!)
-        //print(cell.mainImageView.frame.size)
         
         return cell
     }
 
-    //MARK: - Functions
     
-    func setSize(image: UIImage) -> CGSize{
-        let width = self.tableView.frame.size.width
-        let height = image.size.height / image.scale
-        
-        return CGSize(width: width, height: height)
-    }
-    
-    
-    //MARK: - Load data
-    
-    func loadData(){
-        if let sourceArray = sourceOfApi{
-            if (sourceArray.count - 2) >= sourceIndex{
-                sourceIndex += 1
-                NewsAPI.getNews(stringUrl: sourceArray[sourceIndex].url) { [weak self] (downloadedNews) in
-                    if let news = downloadedNews{
-                        
-                        (self?.articles == nil) ? self?.articles = news : self?.articles?.append(contentsOf: news)
-
-                        self?.tableView.reloadData()
-                    }
-                }
-            }
-        }
-    }
-    //MARK: - Web methods
+    //MARK: - WebViewController
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let webVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WebViewController") as! WebViewController
@@ -111,8 +57,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     
     //MARK: - PopupView
-    
-
     
     @IBAction func seeDescriptionButton(_ sender: UIButton) {
         if let cell = sender.superview?.superview as? MainTableViewCell {
@@ -125,6 +69,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBAction func hideButton(_ sender: UIButton) {
         closePopUpWithDescription()
     }
+    
     @IBOutlet var popUpView: PopUpViewWithDescription!
     
     
@@ -152,13 +97,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
-    //MARK: - Refresher func
-    
-    func pullToRefresh(){
-        articles?.removeAll()
-        sourceIndex = 0
-        loadData()
-        refresher.endRefreshing()
-    }
+
 }
 
