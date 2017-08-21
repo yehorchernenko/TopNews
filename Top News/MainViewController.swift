@@ -18,7 +18,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     var refresher: UIRefreshControl!
     
     var sourceOfApi: [ApiObject]?
-    var sourceIndex = 0
+    var sourceIndex = -1
     var articles: [Article]? = []
     let identifier = "ArticleOFNewsCellIdentifier"
     var newsAlreadyFetched = false
@@ -87,7 +87,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func loadData(){
         if let sourceArray = sourceOfApi{
-            if (sourceArray.count - 1) >= sourceIndex{
+            if (sourceArray.count - 2) >= sourceIndex{
+                sourceIndex += 1
                 NewsAPI.getNews(stringUrl: sourceArray[sourceIndex].url) { [weak self] (downloadedNews) in
                     if let news = downloadedNews{
                         
