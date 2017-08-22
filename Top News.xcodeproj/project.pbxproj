@@ -10,6 +10,7 @@
 		740B67DA1F4216B4009329A3 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740B67D91F4216B4009329A3 /* WebViewController.swift */; };
 		7417DC4B1F39E1B700FB0769 /* Source of API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7417DC4A1F39E1B700FB0769 /* Source of API.swift */; };
 		7429D0901F4465D70070392C /* PopUpViewWithDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7429D08F1F4465D70070392C /* PopUpViewWithDescription.swift */; };
+		747D511E1F4C277F00E52D2C /* ArticleDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747D511D1F4C277F00E52D2C /* ArticleDB.swift */; };
 		74886B071F3B1A5E00E69EA4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74886B051F3B1A5E00E69EA4 /* Main.storyboard */; };
 		74886B091F3B1DDB00E69EA4 /* SourceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74886B081F3B1DDB00E69EA4 /* SourceCollectionViewCell.swift */; };
 		74886B0B1F3B1F8600E69EA4 /* SourceCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74886B0A1F3B1F8600E69EA4 /* SourceCollectionViewController.swift */; };
@@ -22,6 +23,7 @@
 		748B3AE81F374DA7000555EA /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748B3AE71F374DA7000555EA /* Article.swift */; };
 		748B3AEA1F3754BC000555EA /* NewsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748B3AE91F3754BC000555EA /* NewsAPI.swift */; };
 		74D4D7D51F4B26A3005CBA30 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D4D7D41F4B26A3005CBA30 /* StartViewController.swift */; };
+		74D4D7D81F4B2BB8005CBA30 /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D4D7D71F4B2BB8005CBA30 /* TabViewController.swift */; };
 		9A0B3C41C191764DDC6076E5 /* Pods_Top_News.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA47CDE27213FB6909BB2CB9 /* Pods_Top_News.framework */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +32,7 @@
 		740B67D91F4216B4009329A3 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		7417DC4A1F39E1B700FB0769 /* Source of API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Source of API.swift"; sourceTree = "<group>"; };
 		7429D08F1F4465D70070392C /* PopUpViewWithDescription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpViewWithDescription.swift; sourceTree = "<group>"; };
+		747D511D1F4C277F00E52D2C /* ArticleDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleDB.swift; sourceTree = "<group>"; };
 		74886B061F3B1A5E00E69EA4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		74886B081F3B1DDB00E69EA4 /* SourceCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SourceCollectionViewCell.swift; sourceTree = "<group>"; };
 		74886B0A1F3B1F8600E69EA4 /* SourceCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SourceCollectionViewController.swift; sourceTree = "<group>"; };
@@ -44,6 +47,7 @@
 		748B3AE71F374DA7000555EA /* Article.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
 		748B3AE91F3754BC000555EA /* NewsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsAPI.swift; sourceTree = "<group>"; };
 		74D4D7D41F4B26A3005CBA30 /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
+		74D4D7D71F4B2BB8005CBA30 /* TabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
 		824BC1EE13673DDCD03FD77F /* Pods-Top News.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Top News.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Top News/Pods-Top News.debug.xcconfig"; sourceTree = "<group>"; };
 		AA47CDE27213FB6909BB2CB9 /* Pods_Top_News.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Top_News.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -60,18 +64,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		740B67D81F42169A009329A3 /* WebView */ = {
+		740B67D81F42169A009329A3 /* WebViewController */ = {
 			isa = PBXGroup;
 			children = (
 				740B67D91F4216B4009329A3 /* WebViewController.swift */,
 			);
-			name = WebView;
+			name = WebViewController;
 			sourceTree = "<group>";
 		};
 		7417DC491F39E18D00FB0769 /* Source */ = {
 			isa = PBXGroup;
 			children = (
 				7417DC4A1F39E1B700FB0769 /* Source of API.swift */,
+				748B3AE91F3754BC000555EA /* NewsAPI.swift */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -102,8 +107,6 @@
 				748B3AD41F3738C8000555EA /* GUI */,
 				748B3AD31F37389C000555EA /* Support Files */,
 				748B3AD21F373888000555EA /* Data Base */,
-				748B3AE91F3754BC000555EA /* NewsAPI.swift */,
-				74886B051F3B1A5E00E69EA4 /* Main.storyboard */,
 			);
 			path = "Top News";
 			sourceTree = "<group>";
@@ -112,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				748B3AC41F37385D000555EA /* Top_News.xcdatamodeld */,
+				747D511D1F4C277F00E52D2C /* ArticleDB.swift */,
 			);
 			name = "Data Base";
 			sourceTree = "<group>";
@@ -119,6 +123,7 @@
 		748B3AD31F37389C000555EA /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
+				74886B051F3B1A5E00E69EA4 /* Main.storyboard */,
 				748B3AC91F37385D000555EA /* LaunchScreen.storyboard */,
 				748B3ABD1F37385D000555EA /* AppDelegate.swift */,
 				74886B0C1F3B294B00E69EA4 /* Assets.xcassets */,
@@ -130,10 +135,11 @@
 		748B3AD41F3738C8000555EA /* GUI */ = {
 			isa = PBXGroup;
 			children = (
-				74D4D7D31F4B2681005CBA30 /* StartViewController */,
-				740B67D81F42169A009329A3 /* WebView */,
 				74EB50851F41E19600AB9587 /* Main */,
-				74EB50861F41E1A700AB9587 /* Source */,
+				74D4D7D61F4B2B61005CBA30 /* TabViewContriller */,
+				74D4D7D31F4B2681005CBA30 /* StartViewController */,
+				740B67D81F42169A009329A3 /* WebViewController */,
+				74EB50861F41E1A700AB9587 /* SourceViewController */,
 			);
 			name = GUI;
 			sourceTree = "<group>";
@@ -154,6 +160,14 @@
 			name = StartViewController;
 			sourceTree = "<group>";
 		};
+		74D4D7D61F4B2B61005CBA30 /* TabViewContriller */ = {
+			isa = PBXGroup;
+			children = (
+				74D4D7D71F4B2BB8005CBA30 /* TabViewController.swift */,
+			);
+			name = TabViewContriller;
+			sourceTree = "<group>";
+		};
 		74EB50851F41E19600AB9587 /* Main */ = {
 			isa = PBXGroup;
 			children = (
@@ -164,13 +178,13 @@
 			name = Main;
 			sourceTree = "<group>";
 		};
-		74EB50861F41E1A700AB9587 /* Source */ = {
+		74EB50861F41E1A700AB9587 /* SourceViewController */ = {
 			isa = PBXGroup;
 			children = (
 				74886B081F3B1DDB00E69EA4 /* SourceCollectionViewCell.swift */,
 				74886B0A1F3B1F8600E69EA4 /* SourceCollectionViewController.swift */,
 			);
-			name = Source;
+			name = SourceViewController;
 			sourceTree = "<group>";
 		};
 		7D42B768CDCF8B4826A8D79A /* Frameworks */ = {
@@ -318,11 +332,13 @@
 				748B3AE81F374DA7000555EA /* Article.swift in Sources */,
 				748B3AD61F3744AD000555EA /* MainViewController.swift in Sources */,
 				74886B091F3B1DDB00E69EA4 /* SourceCollectionViewCell.swift in Sources */,
+				74D4D7D81F4B2BB8005CBA30 /* TabViewController.swift in Sources */,
 				7429D0901F4465D70070392C /* PopUpViewWithDescription.swift in Sources */,
 				74D4D7D51F4B26A3005CBA30 /* StartViewController.swift in Sources */,
 				748B3ABE1F37385D000555EA /* AppDelegate.swift in Sources */,
 				740B67DA1F4216B4009329A3 /* WebViewController.swift in Sources */,
 				748B3AEA1F3754BC000555EA /* NewsAPI.swift in Sources */,
+				747D511E1F4C277F00E52D2C /* ArticleDB.swift in Sources */,
 				74886B0B1F3B1F8600E69EA4 /* SourceCollectionViewController.swift in Sources */,
 				7417DC4B1F39E1B700FB0769 /* Source of API.swift in Sources */,
 				748B3AC61F37385D000555EA /* Top_News.xcdatamodeld in Sources */,

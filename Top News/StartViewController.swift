@@ -8,6 +8,8 @@
 
 import UIKit
 import UIScrollView_InfiniteScroll
+import CoreData
+
 
 class StartViewController: MainViewController {
 
@@ -33,7 +35,9 @@ class StartViewController: MainViewController {
         }
     }
 
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         sourceOfApi = SourceOfAPI.sortByState()
         
         if !newsAlreadyFetched{
@@ -72,5 +76,29 @@ class StartViewController: MainViewController {
         sourceIndex = -1
         loadData()
         refresher.endRefreshing()
+    }
+    
+    //MARK: - Unwind
+    
+    @IBAction func unwindToStartViewController(segue: UIStoryboardSegue){}
+    
+    //MARK: - Adding to Data Base
+    
+    @IBAction func toReadLaterButton(_ sender: UIButton) {
+        if let cell = sender.superview?.superview as? MainTableViewCell{
+            if let indexPath = self.tableView.indexPath(for: cell){
+                if let article = articles?[indexPath.row]{
+                    updateArticlesDB(with: article)
+                }
+            }
+        }
+    }
+    
+    func updateArticlesDB(with article: Article){
+        container?.performBackgroundTask{ (context) in
+                _ = try? ArticleDB.findOrCreateArticle(with: article, context: context)
+            
+            try? context.save()
+        }
     }
 }

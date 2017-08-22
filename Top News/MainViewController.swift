@@ -8,9 +8,13 @@
 
 import UIKit
 import SDWebImage
+import CoreData
 
 class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-        
+    
+    //MARK: - Properties
+    var container: NSPersistentContainer? = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer
+    
     @IBOutlet weak var tableView: UITableView!
 
 
@@ -25,9 +29,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.didReceiveMemoryWarning()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-
-    }
     
     //MARK: - Working with tableView cells
     

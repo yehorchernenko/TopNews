@@ -23,5 +23,8 @@ class WebViewController: UIViewController {
             }
         }
     }
-    
+ 
+    deinit {
+        print("web view deinited")
+    }
 }
