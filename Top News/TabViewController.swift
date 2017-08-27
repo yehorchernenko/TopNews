@@ -25,13 +25,6 @@ class TabViewController: MainViewController {
         fetchArticleFromDB()
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete{
-            deleteArticleFromDB(at: indexPath.row)
-        }
-    }
-    
-    
     //MARK: - CoreData func
     
     func fetchArticleFromDB(){
@@ -68,9 +61,17 @@ class TabViewController: MainViewController {
                 try context?.save()
                 
                 fetchArticleFromDB()
+                self.noticeSuccess("Done", autoClear: true, autoClearTime: 1)
             }
         } catch{
             print("\(error)")
+        }
+    }
+    @IBAction func deleteButton(_ sender: UIButton) {
+        if let cell = sender.superview?.superview as? MainTableViewCell{
+            if let indexPath = tableView.indexPath(for: cell){
+                deleteArticleFromDB(at: indexPath.row)
+            }
         }
     }
 }

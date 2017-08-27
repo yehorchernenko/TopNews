@@ -58,7 +58,7 @@
                                                     <rect key="frame" x="262.5" y="4" width="112.5" height="32"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <state key="normal" title="To read later">
-                                                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <color key="titleColor" red="0.40780156850814819" green="0.40787321329116821" blue="0.40778630971908569" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
                                                     <connections>
                                                         <action selector="toReadLaterButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QS4-3a-zoI"/>
@@ -274,6 +274,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backButton" destination="rSZ-2z-wd1" id="xQj-Pt-OLJ"/>
                         <outlet property="webView" destination="FtJ-Vb-0em" id="YFV-UB-Kuw"/>
                     </connections>
                 </viewController>
@@ -406,11 +407,14 @@
                                                     </constraints>
                                                 </view>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="64T-hL-4sJ">
-                                                    <rect key="frame" x="262.5" y="4" width="112.5" height="32"/>
+                                                    <rect key="frame" x="343" y="8" width="24" height="24"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <state key="normal" title="To read later">
+                                                    <state key="normal" image="trash">
                                                         <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="deleteButton:" destination="aA9-DM-awB" eventType="touchUpInside" id="PdZ-CS-Xgl"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Author" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="y3M-tH-g1P">
                                                     <rect key="frame" x="8" y="10" width="187.5" height="20.5"/>
@@ -457,7 +461,7 @@
                                                 <constraint firstItem="y3M-tH-g1P" firstAttribute="leading" secondItem="2FZ-sx-qZS" secondAttribute="leading" constant="8" id="Q9E-N7-dvd"/>
                                                 <constraint firstItem="64T-hL-4sJ" firstAttribute="centerY" secondItem="2FZ-sx-qZS" secondAttribute="centerY" id="TVF-Tn-j7C"/>
                                                 <constraint firstItem="uhI-L0-bYs" firstAttribute="height" secondItem="aYz-Pj-Oij" secondAttribute="height" id="Uej-vR-qMA"/>
-                                                <constraint firstItem="64T-hL-4sJ" firstAttribute="trailing" secondItem="2FZ-sx-qZS" secondAttribute="trailing" id="WEZ-rW-PVW"/>
+                                                <constraint firstItem="64T-hL-4sJ" firstAttribute="trailing" secondItem="2FZ-sx-qZS" secondAttribute="trailing" constant="-8" id="WEZ-rW-PVW"/>
                                                 <constraint firstItem="Ibf-ws-HhN" firstAttribute="width" secondItem="eg3-kE-rP9" secondAttribute="width" multiplier="0.35" id="b5Y-8L-gBV"/>
                                                 <constraint firstItem="0ah-AV-9Jd" firstAttribute="trailing" secondItem="eg3-kE-rP9" secondAttribute="trailing" id="dOr-gy-f0R"/>
                                                 <constraint firstItem="eg3-kE-rP9" firstAttribute="centerX" secondItem="aYz-Pj-Oij" secondAttribute="centerX" id="ewp-2K-RQK"/>
@@ -471,7 +475,6 @@
                                                 <constraint firstItem="y3M-tH-g1P" firstAttribute="centerY" secondItem="2FZ-sx-qZS" secondAttribute="centerY" id="rmi-iy-yd9"/>
                                                 <constraint firstItem="y3M-tH-g1P" firstAttribute="width" secondItem="2FZ-sx-qZS" secondAttribute="width" multiplier="0.5" id="uke-gV-KyV"/>
                                                 <constraint firstItem="2FZ-sx-qZS" firstAttribute="top" secondItem="aYz-Pj-Oij" secondAttribute="topMargin" constant="-8" id="vA2-FU-hOd"/>
-                                                <constraint firstItem="64T-hL-4sJ" firstAttribute="width" secondItem="2FZ-sx-qZS" secondAttribute="width" multiplier="0.3" id="vqS-BP-xTO"/>
                                                 <constraint firstItem="2FZ-sx-qZS" firstAttribute="centerX" secondItem="aYz-Pj-Oij" secondAttribute="centerX" id="y4M-Uo-lDq"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -551,5 +554,6 @@
         <image name="check" width="24" height="24"/>
         <image name="mark" width="24" height="24"/>
         <image name="more" width="24" height="24"/>
+        <image name="trash" width="24" height="24"/>
     </resources>
 </document>

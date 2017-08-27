@@ -28,6 +28,7 @@ class StartViewController: MainViewController {
         tableView.addSubview(refresher)
         
         tableView.infiniteScrollIndicatorMargin = 40
+        tableView.infiniteScrollTriggerOffset = 200
         
         tableView.addInfiniteScroll { [weak self] (tableView) in //problem here
             self?.loadData()
@@ -40,9 +41,14 @@ class StartViewController: MainViewController {
         
         sourceOfApi = SourceOfAPI.sortByState()
         
-        if !newsAlreadyFetched{
-            loadData()
-            newsAlreadyFetched = true
+        if (sourceOfApi?.count)! > 0 {
+            if !newsAlreadyFetched{
+                self.pleaseWait()
+                loadData()
+                newsAlreadyFetched = true
+            }
+        } else {
+            pushSourceVC()
         }
     }
     
@@ -63,6 +69,8 @@ class StartViewController: MainViewController {
                         (self?.articles == nil) ? self?.articles = news : self?.articles?.append(contentsOf: news)
                         
                         self?.tableView.reloadData()
+                        self?.clearAllNotice()
+                        self?.refresher.endRefreshing()
                     }
                 }
             }
@@ -74,8 +82,8 @@ class StartViewController: MainViewController {
     func pullToRefresh(){
         articles?.removeAll()
         sourceIndex = -1
+        tableView.reloadData()
         loadData()
-        refresher.endRefreshing()
     }
     
     //MARK: - Unwind
@@ -89,6 +97,7 @@ class StartViewController: MainViewController {
             if let indexPath = self.tableView.indexPath(for: cell){
                 if let article = articles?[indexPath.row]{
                     updateArticlesDB(with: article)
+                    self.noticeSuccess("Done", autoClear: true, autoClearTime: 1)
                 }
             }
         }
@@ -99,6 +108,14 @@ class StartViewController: MainViewController {
                 _ = try? ArticleDB.findOrCreateArticle(with: article, context: context)
             
             try? context.save()
+        }
+    }
+    
+    func pushSourceVC(){
+        if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SourceCollectionViewController") as? SourceCollectionViewController{
+            if let navigation = navigationController{
+                navigation.pushViewController(vc, animated: true)
+            }
         }
     }
 }

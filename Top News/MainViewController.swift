@@ -82,7 +82,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         popUpView.descriptionLabel.text = self.articles?[indexPath.row].description ?? "None description"
 
         UIView.animate(withDuration: 0.4) {
-            //self.visualEffectView.effect = self.effect
             self.popUpView.alpha = 1
             self.popUpView.transform = CGAffineTransform.identity
         }
