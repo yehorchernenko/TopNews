@@ -363,7 +363,7 @@
             </objects>
             <point key="canvasLocation" x="-41" y="534"/>
         </scene>
-        <!--Top News-->
+        <!--Tabs-->
         <scene sceneID="NYZ-2b-W0D">
             <objects>
                 <viewController id="aA9-DM-awB" customClass="TabViewController" customModule="Top_News" customModuleProvider="target" sceneMemberID="viewController">
@@ -500,9 +500,9 @@
                             <constraint firstItem="mUS-e4-zq6" firstAttribute="centerY" secondItem="bON-r1-Btv" secondAttribute="centerY" id="yOF-Bm-959"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Top News" id="Vnx-Rl-aoW"/>
+                    <navigationItem key="navigationItem" title="Tabs" id="Vnx-Rl-aoW"/>
                     <connections>
-                        <outlet property="popUpView" destination="r6h-KJ-vEk" id="oat-uj-0ly"/>
+                        <outlet property="popUpView" destination="vxx-Jo-2RY" id="sll-34-PZO"/>
                         <outlet property="tableView" destination="mUS-e4-zq6" id="feK-oj-DZh"/>
                     </connections>
                 </viewController>

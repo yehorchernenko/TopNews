@@ -16,10 +16,12 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     var container: NSPersistentContainer? = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer
     
     @IBOutlet weak var tableView: UITableView!
-
+    var visualBlurEffect: UIBlurEffect!
+    var visualBlurEffectView: UIVisualEffectView!
 
     var articles: [Article]? = []
     let identifier = "ArticleOFNewsCellIdentifier"
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +31,10 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.didReceiveMemoryWarning()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupBlurView()
+    }
     
     //MARK: - Working with tableView cells
     
@@ -61,9 +67,9 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBAction func seeDescriptionButton(_ sender: UIButton) {
         if let cell = sender.superview?.superview as? MainTableViewCell {
-            let indexPath = self.tableView.indexPath(for: cell)
-            
-            showPopUpWithDescription(at: indexPath!)
+            if let indexPath = self.tableView.indexPath(for: cell){
+            showPopUpWithDescription(at: indexPath)
+            }
         }
     }
     
@@ -75,13 +81,20 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     
     func showPopUpWithDescription(at indexPath: IndexPath){
+        self.view.addSubview(visualBlurEffectView)
         self.view.addSubview(popUpView)
+
+        
+        visualBlurEffectView.layer.transform = CATransform3DMakeAffineTransform(CGAffineTransform.init(scaleX: 5, y: 5))
+
         popUpView.center = self.tableView.center
         popUpView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
         popUpView.alpha = 0
         popUpView.descriptionLabel.text = self.articles?[indexPath.row].description ?? "None description"
-
         UIView.animate(withDuration: 0.4) {
+            self.visualBlurEffectView.layer.transform = CATransform3DIdentity
+            self.visualBlurEffectView.alpha = 1
+            
             self.popUpView.alpha = 1
             self.popUpView.transform = CGAffineTransform.identity
         }
@@ -89,7 +102,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func closePopUpWithDescription(){
         UIView.animate(withDuration: 0.3, animations: {
-            //self.visualEffectView.effect = nil
+            self.visualBlurEffectView.removeFromSuperview()
+            self.visualBlurEffectView.alpha = 0.3
             self.popUpView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
             self.popUpView.alpha = 0
         }) { (succes) in
@@ -97,6 +111,14 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
+    //MARK: Visual effect view
+    
+    func setupBlurView(){
+        visualBlurEffect = UIBlurEffect(style: .light)
+        visualBlurEffectView = UIVisualEffectView(effect: visualBlurEffect)
+        visualBlurEffectView.frame = view.bounds
+        visualBlurEffectView.alpha = 0.3
+    }    
 
 }
 

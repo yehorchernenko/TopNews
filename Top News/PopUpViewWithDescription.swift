@@ -9,8 +9,5 @@
 import UIKit
 
 class PopUpViewWithDescription: UIView {
-
     @IBOutlet weak var descriptionLabel: UILabel!
-
-
 }
