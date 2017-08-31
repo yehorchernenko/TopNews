@@ -11,5 +11,6 @@ target 'Top News' do
   # Pods for Top News
   pod 'SDWebImage', '~> 4.0'
   pod 'UIScrollView-InfiniteScroll', '~> 1.0.0'
+	pod 'SwiftyJSON'
 
 end

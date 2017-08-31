@@ -63,7 +63,7 @@ class StartViewController: MainViewController {
         if let sourceArray = sourceOfApi{
             if ((sourceArray.count - 2) >= sourceIndex) && (sourceArray.count != 0){
                 sourceIndex += 1
-                NewsAPI.getNews(stringUrl: sourceArray[sourceIndex].url) { [weak self] (downloadedNews) in
+                NewsAPI.sharedInstance.getNews(stringUrl: sourceArray[sourceIndex].url) { [weak self] (downloadedNews) in
                     if let news = downloadedNews{
                         
                         (self?.articles == nil) ? self?.articles = news : self?.articles?.append(contentsOf: news)

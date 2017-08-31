@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SwiftyJSON
 
 class Article{
     let author: String
@@ -26,17 +27,13 @@ class Article{
         self.publishedAt = publishedAt 
     }
     
-    class func getNewsFrom(JSON: [String:Any]) -> Article?{
-        guard let articles = JSON["articles"] as? [String:Any] else {return nil}
-        
-        guard let author = articles["author"] as? String,
-            let title = articles["title"] as? String,
-            let description = articles["description"] as? String,
-            let url = articles["url"] as? String,
-            let urlToImage = articles["urlToImage"] as? String,
-            let publishedAt = articles["publishedAt"] as? String
-            else {return nil}
-        
-        return Article(author: author, title: title, description: description, url: url, urlToImage: urlToImage, publishedAt: publishedAt)
+    init(json: JSON) {
+        self.author = json["author"].stringValue
+        self.title = json["title"].stringValue
+        self.description = json["description"].stringValue
+        self.url = json["url"].stringValue
+        self.urlToImage = json["urlToImage"].stringValue
+        self.publishedAt = json["publishedAt"].stringValue
     }
+
 }

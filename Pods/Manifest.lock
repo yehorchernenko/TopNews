@@ -2,16 +2,19 @@ PODS:
   - SDWebImage (4.0.0):
     - SDWebImage/Core (= 4.0.0)
   - SDWebImage/Core (4.0.0)
+  - SwiftyJSON (3.1.4)
   - UIScrollView-InfiniteScroll (1.0.2)
 
 DEPENDENCIES:
   - SDWebImage (~> 4.0)
+  - SwiftyJSON
   - UIScrollView-InfiniteScroll (~> 1.0.0)
 
 SPEC CHECKSUMS:
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
+  SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   UIScrollView-InfiniteScroll: c132d6d5851daff229ab4a1060ccf70a05a051c9
 
-PODFILE CHECKSUM: 119f72cd088c169814e73b328616685d2e931e95
+PODFILE CHECKSUM: 4fae0028c979dde0f47c5c50a393f38b616c857f
 
 COCOAPODS: 1.1.1
