@@ -1,4 +1,5 @@
 PODS:
+  - Alamofire (4.5.0)
   - SDWebImage (4.0.0):
     - SDWebImage/Core (= 4.0.0)
   - SDWebImage/Core (4.0.0)
@@ -6,15 +7,17 @@ PODS:
   - UIScrollView-InfiniteScroll (1.0.2)
 
 DEPENDENCIES:
+  - Alamofire (~> 4.4)
   - SDWebImage (~> 4.0)
   - SwiftyJSON
   - UIScrollView-InfiniteScroll (~> 1.0.0)
 
 SPEC CHECKSUMS:
+  Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   UIScrollView-InfiniteScroll: c132d6d5851daff229ab4a1060ccf70a05a051c9
 
-PODFILE CHECKSUM: 4fae0028c979dde0f47c5c50a393f38b616c857f
+PODFILE CHECKSUM: 18b0b8793da15339ebbe826c124cf6a3b9010cc9
 
 COCOAPODS: 1.1.1
