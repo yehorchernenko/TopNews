@@ -10,7 +10,7 @@ import UIKit
 import SDWebImage
 import CoreData
 
-class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, PoPUpDelegate {
     
     //MARK: - Properties
     var container: NSPersistentContainer? = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer
@@ -73,10 +73,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
-    @IBAction func hideButton(_ sender: UIButton) {
-        closePopUpWithDescription()
-    }
-    
     @IBOutlet var popUpView: PopUpViewWithDescription!
     
     
@@ -84,7 +80,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.view.addSubview(visualBlurEffectView)
         self.view.addSubview(popUpView)
 
-        
+        popUpView.delegate = self
         visualBlurEffectView.layer.transform = CATransform3DMakeAffineTransform(CGAffineTransform.init(scaleX: 5, y: 5))
 
         popUpView.center = self.tableView.center
@@ -122,3 +118,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 
 }
 
+protocol PoPUpDelegate{
+    func closePopUpWithDescription()
+}

@@ -31,7 +31,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="275"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wMj-gq-ExC" id="RQ5-cY-3wP">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="275"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="274"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="onS-9L-1uD">
@@ -187,7 +187,7 @@
                                 <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
-                                <action selector="hideButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Zji-JN-n0S"/>
+                                <action selector="hidePopUpView:" destination="r6h-KJ-vEk" eventType="touchUpInside" id="PX7-jU-8dR"/>
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="khI-PD-AnS">
@@ -517,7 +517,7 @@
                                 <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
-                                <action selector="hideButton:" destination="aA9-DM-awB" eventType="touchUpInside" id="ENo-kY-quZ"/>
+                                <action selector="hidePopUpView:" destination="vxx-Jo-2RY" eventType="touchUpInside" id="xuO-Eu-R8Q"/>
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XTA-zd-U4q">

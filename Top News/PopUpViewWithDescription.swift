@@ -9,5 +9,11 @@
 import UIKit
 
 class PopUpViewWithDescription: UIView {
+    
+    var delegate: PoPUpDelegate?
+    
     @IBOutlet weak var descriptionLabel: UILabel!
+    @IBAction func hidePopUpView(_ sender: Any) {
+        delegate?.closePopUpWithDescription()
+    }
 }
