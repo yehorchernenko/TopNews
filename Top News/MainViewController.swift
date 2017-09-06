@@ -10,7 +10,7 @@ import UIKit
 import SDWebImage
 import CoreData
 
-class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, PoPUpDelegate {
+class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, PoPUpDelegate, MainViewCellProtocoll {
     
     //MARK: - Properties
     var container: NSPersistentContainer? = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer
@@ -43,7 +43,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! MainTableViewCell
+        let cell = Bundle.main.loadNibNamed("MainTableViewCell", owner: self, options: nil)?.first as! MainTableViewCell
+        
         cell.titleLabel.text = self.articles?[indexPath.row].title
         cell.author.text = self.articles?[indexPath.row].author
         cell.publishedAtLabel.text = self.articles?[indexPath.row].publishedAt
@@ -65,18 +66,14 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     //MARK: - PopupView
     
-    @IBAction func seeDescriptionButton(_ sender: UIButton) {
-        if let cell = sender.superview?.superview as? MainTableViewCell {
-            if let indexPath = self.tableView.indexPath(for: cell){
-            showPopUpWithDescription(at: indexPath)
-            }
-        }
+    func seeDescription(at indexPathRow: Int) {
+            showPopUpWithDescription(at: indexPathRow)
     }
     
     @IBOutlet var popUpView: PopUpViewWithDescription!
     
     
-    func showPopUpWithDescription(at indexPath: IndexPath){
+    func showPopUpWithDescription(at indexPathRow: Int){
         self.view.addSubview(visualBlurEffectView)
         self.view.addSubview(popUpView)
 
@@ -86,7 +83,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         popUpView.center = self.tableView.center
         popUpView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
         popUpView.alpha = 0
-        popUpView.descriptionLabel.text = self.articles?[indexPath.row].description ?? "None description"
+        popUpView.descriptionLabel.text = self.articles?[indexPathRow].description ?? "None description"
         UIView.animate(withDuration: 0.4) {
             self.visualBlurEffectView.layer.transform = CATransform3DIdentity
             self.visualBlurEffectView.alpha = 1
@@ -120,4 +117,9 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 
 protocol PoPUpDelegate{
     func closePopUpWithDescription()
+}
+
+@objc protocol MainViewCellProtocoll{
+    func seeDescription(at indexPathRow: Int)
+    @objc optional func toReadLater()
 }

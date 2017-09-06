@@ -10,11 +10,11 @@ import Foundation
 import SwiftyJSON
 import Alamofire
 
-struct NewsAPI{
+class NewsAPI{
     
-    static let sharedInstance = NewsAPI()
+    //static let sharedInstance = NewsAPI()
     
-    func getNews(stringUrl: String, newsArray: @escaping ([Article]?) -> Void){
+    class func getNews(stringUrl: String, newsArray: @escaping ([Article]?) -> Void){
         Alamofire.request(stringUrl).responseJSON { (fetchedJson) in
             if let jsonData = fetchedJson.data{
                 
