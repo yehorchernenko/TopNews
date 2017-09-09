@@ -11,9 +11,9 @@ import SDWebImage
 import CoreData
 
 enum ViewControllerType {
-    case main
-    case start
-    case tab
+    case mainVC
+    case startVC
+    case tabVC
     
 }
 
@@ -22,7 +22,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     //MARK: - Properties
     var container: NSPersistentContainer? = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer
     
-    var VCType = ViewControllerType.main
+    var VCType = ViewControllerType.mainVC
     
     
     @IBOutlet weak var tableView: UITableView!
@@ -125,15 +125,86 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         visualBlurEffectView = UIVisualEffectView(effect: visualBlurEffect)
         visualBlurEffectView.frame = view.bounds
         visualBlurEffectView.alpha = 0.3
-    }    
+    }
+    
+    //MARK: - MainViewCellProtocoll
+    
+    //MARK: Adding news to DB
+    
+    func toReadLaterOrDelete(at row: Int) {
+        if VCType == .startVC{
+            if let article = articles?[row]{
+                updateArticlesDB(with: article)
+                self.noticeSuccess("Done", autoClear: true, autoClearTime: 1)
+            }
+        } else if VCType == .tabVC{
+            deleteArticleFromDB(at: row)
+        }
+    }
+    
+    func updateArticlesDB(with article: Article){
+        container?.performBackgroundTask{ (context) in
+            _ = try? ArticleDB.findOrCreateArticle(with: article, context: context)
+            
+            try? context.save()
+        }
+    }
+    
+    //MARK: Delete news from DB
+    func deleteArticleFromDB(at index: Int){
+        let context = container?.viewContext
+        let articleRequest: NSFetchRequest<ArticleDB> = ArticleDB.fetchRequest()
+        
+        do{
+            let tempArticles = try context?.fetch(articleRequest)
+            
+            if let art = tempArticles?[index]{
+                context?.delete(art)
+                
+                try context?.save()
+                
+                fetchArticleFromDB()
+                self.noticeSuccess("Done", autoClear: true, autoClearTime: 1)
+            }
+        } catch{
+            print("\(error)")
+        }
+    }
+    
+    //MARK: - CoreData func
+    
+    func fetchArticleFromDB(){
+        if let context = container?.viewContext{
+            context.perform { [weak self] in
+                let articleRequest: NSFetchRequest<ArticleDB> = ArticleDB.fetchRequest()
+                
+                if let tempArticles = try? context.fetch(articleRequest){
+                    self?.articles?.removeAll()
+                    
+                    for art in tempArticles{
+                        let newArt = Article(author: art.author!, title: art.title!, description: art.descript!, url: art.url!, urlToImage: art.urlToImage!, publishedAt: art.publishedAt!)
+                        self?.articles?.append(newArt)
+                    }
+                    
+                    DispatchQueue.main.async {
+                        self?.tableView.reloadData()
+                    }
+                }
+            }
+        }
+    }
 
 }
+
+//MARK: - Delegate
+
 
 protocol PoPUpDelegate{
     func closePopUpWithDescription()
 }
 
-@objc protocol MainViewCellProtocoll{
+protocol MainViewCellProtocoll{
     func seeDescription(at indexPathRow: Int)
-    @objc optional func toReadLaterButton(at row: Int)
+    func toReadLaterOrDelete(at row: Int)
+    var VCType:ViewControllerType {get set}
 }

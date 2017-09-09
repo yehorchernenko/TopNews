@@ -23,6 +23,7 @@ class StartViewController: MainViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        VCType = .startVC
         
         
         refresher = UIRefreshControl()
@@ -118,21 +119,6 @@ class StartViewController: MainViewController {
     @IBAction func unwindToStartViewController(segue: UIStoryboardSegue){}
     
     //MARK: - Adding to Data Base
-    
-    func toReadLaterButton(at row: Int) {
-        if let article = articles?[row]{
-            updateArticlesDB(with: article)
-            self.noticeSuccess("Done", autoClear: true, autoClearTime: 1)
-        }
-    }
-    
-    func updateArticlesDB(with article: Article){
-        container?.performBackgroundTask{ (context) in
-                _ = try? ArticleDB.findOrCreateArticle(with: article, context: context)
-            
-            try? context.save()
-        }
-    }
     
     func pushSourceVC(){
         if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SourceCollectionViewController") as? SourceCollectionViewController{

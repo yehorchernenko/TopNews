@@ -26,7 +26,7 @@ class MainTableViewCell: UITableViewCell {
 
     @IBAction func toReadLaterOrDelete(_ sender: UIButton) {
         if let indexPath = self.indexPath{
-            delegate?.toReadLaterButton!(at: indexPath.row)
+            delegate?.toReadLaterOrDelete(at: indexPath.row)
         }
     }
 
