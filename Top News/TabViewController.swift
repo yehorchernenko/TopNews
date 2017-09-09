@@ -13,6 +13,7 @@ class TabViewController: MainViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        VCType = .tab
     }
 
     override func didReceiveMemoryWarning() {

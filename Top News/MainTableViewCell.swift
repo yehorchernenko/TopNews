@@ -19,11 +19,22 @@ class MainTableViewCell: UITableViewCell {
     var delegate: MainViewCellProtocoll?
     
     @IBAction func seeDescriptionButton(_ sender: UIButton) {
-       /* Здесь нужно получить индекс ячейки что бы передать его в делегат
-        delegate?.seeDescription(at: Int)
-        */
+        if let indexPath = self.indexPath{
+            delegate?.seeDescription(at: indexPath.row)
+        }
+    }
+
+    @IBAction func toReadLaterOrDelete(_ sender: UIButton) {
+        if let indexPath = self.indexPath{
+            delegate?.toReadLaterButton!(at: indexPath.row)
+        }
     }
 
 }
 
-
+extension UITableViewCell {
+    
+    var indexPath: IndexPath? {
+        return (superview?.superview as? UITableView)?.indexPath(for: self)
+    }
+}

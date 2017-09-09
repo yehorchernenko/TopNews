@@ -18,22 +18,18 @@ class StartViewController: MainViewController {
     var sourceOfApi: [ApiObject]?
     var sourceIndex = -1
     var newsAlreadyFetched = false
+    var isLoading = false
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         refresher = UIRefreshControl()
         refresher.attributedTitle = NSAttributedString(string: "Refreshing...")
         refresher.addTarget(self, action: #selector(StartViewController.pullToRefresh), for: .valueChanged)
         tableView.addSubview(refresher)
         
-        tableView.infiniteScrollIndicatorMargin = 40
-        tableView.infiniteScrollTriggerOffset = 200
-        
-        tableView.addInfiniteScroll { [weak self] (tableView) in //problem here
-            self?.loadData()
-            self?.tableView.finishInfiniteScroll()
-        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -56,6 +52,23 @@ class StartViewController: MainViewController {
         super.didReceiveMemoryWarning()
     }
     
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let segueIdentifier = segue.identifier{
+            switch segueIdentifier {
+            case "SourceViewControllerSegue":
+                DispatchQueue.global(qos: .default).asyncAfter(deadline: DispatchTime.now() + 1, execute: {
+                    self.articles?.removeAll()
+                    self.tableView.reloadData()
+                    self.sourceIndex = -1
+                    self.newsAlreadyFetched = false
+                })
+            default:
+                assert(false)
+            }
+        }
+    }
+    
     //MARK: - Load data from API storage
     
     func loadData(){
@@ -70,9 +83,24 @@ class StartViewController: MainViewController {
                         self?.tableView.reloadData()
                         self?.clearAllNotice()
                         self?.refresher.endRefreshing()
+                        self?.isLoading = false
                     }
                 }
+            } else {
+                clearAllNotice()
             }
+        }
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let currentOffset = scrollView.contentOffset.y
+        let maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height
+        let deltaOffset = maximumOffset - currentOffset
+        
+        if (deltaOffset <= 0) && !isLoading{
+            isLoading = true
+            pleaseWait()
+            loadData()
         }
     }
     
@@ -91,14 +119,10 @@ class StartViewController: MainViewController {
     
     //MARK: - Adding to Data Base
     
-    @IBAction func toReadLaterButton(_ sender: UIButton) {
-        if let cell = sender.superview?.superview as? MainTableViewCell{
-            if let indexPath = self.tableView.indexPath(for: cell){
-                if let article = articles?[indexPath.row]{
-                    updateArticlesDB(with: article)
-                    self.noticeSuccess("Done", autoClear: true, autoClearTime: 1)
-                }
-            }
+    func toReadLaterButton(at row: Int) {
+        if let article = articles?[row]{
+            updateArticlesDB(with: article)
+            self.noticeSuccess("Done", autoClear: true, autoClearTime: 1)
         }
     }
     

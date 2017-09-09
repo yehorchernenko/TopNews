@@ -16,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="273"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="272.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="273"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xCF-GB-ZrI">
@@ -52,6 +52,9 @@
                                 <state key="normal" title="To read later">
                                     <color key="titleColor" red="0.40780156849999999" green="0.40787321329999998" blue="0.40778630970000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="toReadLaterOrDelete:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="u98-PA-JFk"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -76,26 +79,25 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c6D-2q-Y9z">
                                 <rect key="frame" x="4" y="8" width="114" height="24"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="24" id="ljG-Bx-xG6"/>
+                                    <constraint firstAttribute="height" constant="24" id="Ha4-2g-4s0"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <state key="normal" title="See description">
                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="seeDescriptionButton:" destination="-1" eventType="touchUpInside" id="JpJ-OU-ryC"/>
+                                    <action selector="seeDescriptionButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Bhi-qh-IPH"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="c6D-2q-Y9z" firstAttribute="leading" secondItem="rBv-aJ-eSK" secondAttribute="leading" constant="4" id="CGN-js-IaJ"/>
+                            <constraint firstAttribute="bottom" secondItem="c6D-2q-Y9z" secondAttribute="bottom" constant="8" id="ENt-ba-l0Q"/>
                             <constraint firstItem="SxE-gg-xGT" firstAttribute="width" secondItem="rBv-aJ-eSK" secondAttribute="width" multiplier="0.5" id="Rz7-4h-mmV"/>
-                            <constraint firstItem="c6D-2q-Y9z" firstAttribute="centerY" secondItem="rBv-aJ-eSK" secondAttribute="centerY" id="YdX-Zj-5Dh"/>
                             <constraint firstAttribute="trailing" secondItem="SxE-gg-xGT" secondAttribute="trailing" constant="4" id="hCT-jv-nhW"/>
+                            <constraint firstItem="c6D-2q-Y9z" firstAttribute="leading" secondItem="rBv-aJ-eSK" secondAttribute="leading" constant="4" id="k5e-lh-tAG"/>
                             <constraint firstItem="SxE-gg-xGT" firstAttribute="centerY" secondItem="rBv-aJ-eSK" secondAttribute="centerY" id="mO3-el-V5m"/>
                             <constraint firstAttribute="bottom" secondItem="SxE-gg-xGT" secondAttribute="bottom" constant="8" id="rgB-Am-Pk1"/>
-                            <constraint firstAttribute="bottom" secondItem="c6D-2q-Y9z" secondAttribute="bottom" constant="8" id="t0t-K7-Naj"/>
                             <constraint firstAttribute="height" constant="40" id="vU4-j3-SGV"/>
                         </constraints>
                     </view>

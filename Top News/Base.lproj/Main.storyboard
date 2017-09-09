@@ -48,7 +48,7 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                             <connections>
-                                <segue destination="uw3-Nk-8EI" kind="show" id="8cQ-Jd-cTK"/>
+                                <segue destination="uw3-Nk-8EI" kind="show" identifier="SourceViewControllerSegue" id="8cQ-Jd-cTK"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="mark" style="plain" id="Ins-AM-Shu">

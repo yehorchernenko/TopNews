@@ -10,10 +10,20 @@ import UIKit
 import SDWebImage
 import CoreData
 
+enum ViewControllerType {
+    case main
+    case start
+    case tab
+    
+}
+
 class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, PoPUpDelegate, MainViewCellProtocoll {
     
     //MARK: - Properties
     var container: NSPersistentContainer? = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer
+    
+    var VCType = ViewControllerType.main
+    
     
     @IBOutlet weak var tableView: UITableView!
     var visualBlurEffect: UIBlurEffect!
@@ -21,10 +31,13 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     var articles: [Article]? = []
     let identifier = "ArticleOFNewsCellIdentifier"
+    
+    
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        LocalNotification.scheduleNotification()
     }
     
     override func didReceiveMemoryWarning() {
@@ -49,6 +62,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.author.text = self.articles?[indexPath.row].author
         cell.publishedAtLabel.text = self.articles?[indexPath.row].publishedAt
         cell.mainImageView.sd_setImage(with: URL(string: self.articles?[indexPath.row].urlToImage ?? "http://itdesignhouse.com/wp-content/themes/TechNews/images/img_not_available.jpg"), placeholderImage: #imageLiteral(resourceName: "default"))
+        cell.delegate = self
         
         return cell
     }
@@ -121,5 +135,5 @@ protocol PoPUpDelegate{
 
 @objc protocol MainViewCellProtocoll{
     func seeDescription(at indexPathRow: Int)
-    @objc optional func toReadLater()
+    @objc optional func toReadLaterButton(at row: Int)
 }

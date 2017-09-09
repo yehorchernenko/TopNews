@@ -28,12 +28,13 @@ class Article{
     }
     
     init(json: JSON) {
-        self.author = json["author"].stringValue
+
+        self.author = json["author"].string ?? "Unknown"
         self.title = json["title"].stringValue
-        self.description = json["description"].stringValue
+        self.description = json["description"].string ?? "Non description"
         self.url = json["url"].stringValue
         self.urlToImage = json["urlToImage"].stringValue
-        self.publishedAt = json["publishedAt"].stringValue
+        self.publishedAt = json["publishedAt"].string ?? "unknown"
     }
 
 }

@@ -11,6 +11,7 @@
 		7417DC4B1F39E1B700FB0769 /* Source of API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7417DC4A1F39E1B700FB0769 /* Source of API.swift */; };
 		741917641F60785A0033AEA9 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741917631F60785A0033AEA9 /* MainTableViewCell.swift */; };
 		741917661F6078620033AEA9 /* MainTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 741917651F6078620033AEA9 /* MainTableViewCell.xib */; };
+		7419176A1F61B1190033AEA9 /* LocalNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741917691F61B1190033AEA9 /* LocalNotification.swift */; };
 		7429D0901F4465D70070392C /* PopUpViewWithDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7429D08F1F4465D70070392C /* PopUpViewWithDescription.swift */; };
 		747D511E1F4C277F00E52D2C /* ArticleDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747D511D1F4C277F00E52D2C /* ArticleDB.swift */; };
 		747D51221F4F20D900E52D2C /* SwiftNotice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747D51211F4F20D900E52D2C /* SwiftNotice.swift */; };
@@ -35,6 +36,7 @@
 		7417DC4A1F39E1B700FB0769 /* Source of API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Source of API.swift"; sourceTree = "<group>"; };
 		741917631F60785A0033AEA9 /* MainTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
 		741917651F6078620033AEA9 /* MainTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainTableViewCell.xib; sourceTree = "<group>"; };
+		741917691F61B1190033AEA9 /* LocalNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotification.swift; sourceTree = "<group>"; };
 		7429D08F1F4465D70070392C /* PopUpViewWithDescription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpViewWithDescription.swift; sourceTree = "<group>"; };
 		747D511D1F4C277F00E52D2C /* ArticleDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleDB.swift; sourceTree = "<group>"; };
 		747D51211F4F20D900E52D2C /* SwiftNotice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftNotice.swift; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 				748B3ABD1F37385D000555EA /* AppDelegate.swift */,
 				74886B0C1F3B294B00E69EA4 /* Assets.xcassets */,
 				748B3ACC1F37385D000555EA /* Info.plist */,
+				741917691F61B1190033AEA9 /* LocalNotification.swift */,
 			);
 			name = "Support Files";
 			sourceTree = "<group>";
@@ -339,6 +342,7 @@
 				748B3AD61F3744AD000555EA /* MainViewController.swift in Sources */,
 				747D51221F4F20D900E52D2C /* SwiftNotice.swift in Sources */,
 				74886B091F3B1DDB00E69EA4 /* SourceCollectionViewCell.swift in Sources */,
+				7419176A1F61B1190033AEA9 /* LocalNotification.swift in Sources */,
 				741917641F60785A0033AEA9 /* MainTableViewCell.swift in Sources */,
 				74D4D7D81F4B2BB8005CBA30 /* TabViewController.swift in Sources */,
 				7429D0901F4465D70070392C /* PopUpViewWithDescription.swift in Sources */,
