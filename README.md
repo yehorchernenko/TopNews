@@ -1,8 +1,12 @@
 # TopNews
 
 Top News – application where from pool of news sources(about 50) you can choose some and their new wiil appera in main screen there you can see preview with image and other information also you can see description and mark news to read later and it saved to database and any time you want it , you will beable to read in special screen with saved news. By selecting news it opens in WebView.
-API – NewsApi
-Local Notification, CoreData, Alamofire, SwiftyJSO, SDWebImage
+* API – NewsApi
+* Local Notification
+* CoreData
+* Alamofire 
+* SwiftyJSO
+* SDWebImage
 
 ![2018-05-26 09 38 15](https://user-images.githubusercontent.com/23559375/40573709-e5f89140-60cd-11e8-80b0-6b240b28c9dd.png)
 ![2018-05-26 09 38 47](https://user-images.githubusercontent.com/23559375/40573710-e61e11c2-60cd-11e8-8847-c6156254b4af.png)
