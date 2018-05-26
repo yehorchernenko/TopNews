@@ -14,3 +14,10 @@ Top News – application where from pool of news sources(about 50) you can choos
 ![2018-05-26 10 02 07](https://user-images.githubusercontent.com/23559375/40573712-e669e5f2-60cd-11e8-9c60-b477201fc555.png)
 ![2018-05-26 09 37 57](https://user-images.githubusercontent.com/23559375/40573713-e6957f00-60cd-11e8-8153-f39025ab4a41.png)
 ![2018-05-26 09 40 09](https://user-images.githubusercontent.com/23559375/40573714-e6bd7d20-60cd-11e8-8998-b6c7bdef1cf7.png)
+
+
+### Contacts
+* Telegram - https://t.me/egor_chernenko  
+* Email - lordo916@gmail.com 
+
+-----
